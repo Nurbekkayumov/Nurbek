@@ -24,27 +24,26 @@ void file_1(string vakansia, string name)
    }
    input_file << "\n Sizdiz hatunuz satti jiberildi, jumys berushiden habarlama kutynyz.";
    input_file.close();
- 
- 
 }
  
 int main()
 {
-   
-   
-   cout << "\t\t\t\t\t\t\ HeadHunter.kz\n";
+   cout << "\t\t\t\t\t\tHeadHunter.kz\n";
    string name;
-   cout << " Sizdin Aty:";
+   cout << "Sizdin Atynyz:";
    cin >> name;
    int tenge;
  
-   cout << "Qajettu jalaqu:"; cin >> tenge;
+   cout << "Qajettu jalaqy:"; 
+   cin >> tenge;
    if (tenge <= 150000)
    {
-       string kassir = "\n1) Bos oryn: Kassir, jalaqy:130000tng\n Jumys uakyty:5/2, jartu kuni\n"; cout << kassir;
-       string povar =  "\n2) Bos oryn: EYU-dagu Aspaz, Jalaqy:140000 tng\n Jymus uakyty:4/3, Tolyq kun\n"; cout << povar;
+       string kassir = "\n1) Bos oryn: Kassir, jalaqy:130000tng\n Jumys uakyty:5/2, jarty kuni\n"; 
+       cout << kassir;
+       string povar = "\n2) Bos oryn: EYU-dagu Aspaz, Jalaqy:140000 tng\n Jymus uakyty:4/3, Tolyq kun\n"; 
+       cout << povar;
        int vibor1;
-       cout << "\n\ Eger siz jayap berginiz kelse jumys ornyn tandanyz:";
+       cout << "\nEger siz jayap berginiz kelse jumys ornyn tandanyz:";
        cin >> vibor1;
        switch (vibor1)
        {
@@ -60,12 +59,14 @@ int main()
    }
    else if (tenge >= 150000 && tenge <= 300000)
    {
-       string System_adm = "\n1) Bos oryn: Juielik akimshi: kolledjge\n Jalaqy: 265000 tng\n jumys uakyty: 5/2, jarty kun "; cout << System_adm;
+       string System_adm = "\n1) Bos oryn: Juielik akimshi: kolledjge\n Jalaqy: 265000 tng\n jumys uakyty: 5/2, jarty kun "; 
+       cout << System_adm;
        cout << " Talaptar: Computerdin senimdi paydalanushysy \n kense bagdarmalaryn bilu\n\n\n\n";
-       string c_dev = "\n2)Bos otyn: Bagdarlamashy C++, Jalaqy: 300000 tng\n Jums uakyty:5/2, Tolyk kunВ\n"; cout << c_dev;
+       string c_dev = "\n2)Bos otyn: Bagdarlamashy C++, Jalaqy: 300000 tng\n Jums uakyty:5/2, Tolyk kun\n"; 
+       cout << c_dev;
        cout << " Talaptar: senior development c++\n\n\n";
        int vibor1;
-       cout << "\n\n Eger siz jayap berginiz kelse jumys ornyn tandanyz:";
+       cout << "\n\nEger siz jayap berginiz kelse jumys ornyn tandanyz:";
        cin >> vibor1;
        switch (vibor1)
        {
