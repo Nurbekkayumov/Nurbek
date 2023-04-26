@@ -1,32 +1,103 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+#include <Windows.h>
+ 
+using namespace std;
+ 
+ 
+void file_1(string vakansia, string name)
+{
+   
+   ofstream input_file;
+   input_file.open("Pismo.txt");
+   input_file << vakansia << name;
+   string input;
+   cout << " Sizdin hatynyz: (jyberu ushin 'stop' jazynyz)" << std::endl;
+   while (true) {
+       getline(cin, input);
+       if (input == "stop") {
+           break;
+       }
+       input_file << input << endl;
+   }
+   input_file << "\n Sizdiz hatunuz satti jiberildi, jumys berushiden habarlama kutynyz.";
+   input_file.close();
+ 
+ 
+}
+ 
+int main()
+{
+   
+   
+   cout << "\t\t\t\t\t\t\ HeadHunter.kz\n";
+   string name;
+   cout << " Sizdin Aty:";
+   cin >> name;
+   int tenge;
+ 
+   cout << "Qajettu jalaqu:"; cin >> tenge;
+   if (tenge <= 150000)
+   {
+       string kassir = "\n1) Bos oryn: Kassir, jalaqy:130000tng\n Jumys uakyty:5/2, jartu kuni\n"; cout << kassir;
+       string povar =  "\n2) Bos oryn: EYU-dagu Aspaz, Jalaqy:140000 tng\n Jymus uakyty:4/3, Tolyq kun\n"; cout << povar;
+       int vibor1;
+       cout << "\n\ Eger siz jayap berginiz kelse jumys ornyn tandanyz:";
+       cin >> vibor1;
+       switch (vibor1)
+       {
+       case 1:
+           file_1(kassir, name);
+           break;
+       case 2:
+           file_1(povar, name);
+           break;
+       default:
+           break;
+       }
+   }
+   else if (tenge >= 150000 && tenge <= 300000)
+   {
+       string System_adm = "\n1) Bos oryn: Juielik akimshi: kolledjge\n Jalaqy: 265000 tng\n jumys uakyty: 5/2, jarty kun "; cout << System_adm;
+       cout << " Talaptar: Computerdin senimdi paydalanushysy \n kense bagdarmalaryn bilu\n\n\n\n";
+       string c_dev = "\n2)Bos otyn: Bagdarlamashy C++, Jalaqy: 300000 tng\n Jums uakyty:5/2, Tolyk kunВ\n"; cout << c_dev;
+       cout << " Talaptar: senior development c++\n\n\n";
+       int vibor1;
+       cout << "\n\n Eger siz jayap berginiz kelse jumys ornyn tandanyz:";
+       cin >> vibor1;
+       switch (vibor1)
+       {
+       case 1:
+           file_1(System_adm, name);
+           break;
+       case 2:
+           file_1(c_dev, name);
+           break;
+       default:
+           break;
+       }
+   }
+   else if (tenge > 300000)
+   {
+       string F_stack = "\n Bos oryn: FullSttack bagdarlamashy: IT\n, Jalaqy: 500000 tng\n Jumys uakyty: тегін \n"; cout << F_stack;
+       cout << " Talaptar: C,, C#, Python, SQL \n\n\n\n";
+       string Frntend = "\n2) Bos oryn: FronEnd bagdarlamashy: Azirleushi, Jalaqy: 650000 tng\n Ugymdagy jumys, tolyq kun \n"; cout << Frntend;
+       cout << "Talaptar: HTML, CSS, Python, JS \n\n\n";
+       int vibor1;
+       cout << "\n\n Eger siz jayap berginiz kelse jumys ornyn tandanyz:  ";
+       cin >> vibor1;
+       switch (vibor1)
+       {
+       case 1:
+           file_1(F_stack, name);
+           break;
+       case 2:
+           file_1(Frntend, name);
+           break;
+       default:
+           break;
+       }
+   }
+}
