@@ -1,104 +1,172 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 #include <fstream>
-#include <string>
-#include <cstdlib>
-#include <Windows.h>
- 
+
+
 using namespace std;
- 
- 
-void file_1(string vakansia, string name)
-{
-   
-   ofstream input_file;
-   input_file.open("Pismo.txt");
-   input_file << vakansia << name;
-   string input;
-   cout << " Sizdin hatynyz: (jyberu ushin 'stop' jazynyz)" << std::endl;
-   while (true) {
-       getline(cin, input);
-       if (input == "stop") {
-           break;
-       }
-       input_file << input << endl;
-   }
-   input_file << "\n Sizdiz hatunuz satti jiberildi, jumys berushiden habarlama kutynyz.";
-   input_file.close();
+
+struct Job {
+    string title;
+    string city;
+    double salary;
+};
+void saveJobsToFile(const vector<Job>& jobs, string fileName) {
+    ofstream outFile(fileName);
+    
+    if (!outFile) {
+        cerr << "Unable to open output file: " << fileName << endl;
+        return;
+    }
+    for (const auto& job : jobs) {
+        outFile << job.title << "," << job.city << "," << job.salary << endl;
+    }
+    outFile.close();
+    cout << "Successfully saved jobs to file: " << fileName << endl;
 }
- 
-int main()
-{
-   cout << "\t\t\t\t\t\tHeadHunter.kz\n";
-   string name;
-   cout << "Sizdin Atynyz:";
-   cin >> name;
-   int tenge;
- 
-   cout << "Qajettu jalaqy:"; 
-   cin >> tenge;
-   if (tenge <= 150000)
-   {
-       string kassir = "\n1) Bos oryn: Kassir, jalaqy:130000tng\n Jumys uakyty:5/2, jarty kuni\n"; 
-       cout << kassir;
-       string povar = "\n2) Bos oryn: EYU-dagu Aspaz, Jalaqy:140000 tng\n Jymus uakyty:4/3, Tolyq kun\n"; 
-       cout << povar;
-       int vibor1;
-       cout << "\nEger siz jayap berginiz kelse jumys ornyn tandanyz:";
-       cin >> vibor1;
-       switch (vibor1)
-       {
-       case 1:
-           file_1(kassir, name);
-           break;
-       case 2:
-           file_1(povar, name);
-           break;
-       default:
-           break;
-       }
-   }
-   else if (tenge >= 150000 && tenge <= 300000)
-   {
-       string System_adm = "\n1) Bos oryn: Juielik akimshi: kolledjge\n Jalaqy: 265000 tng\n jumys uakyty: 5/2, jarty kun "; 
-       cout << System_adm;
-       cout << " Talaptar: Computerdin senimdi paydalanushysy \n kense bagdarmalaryn bilu\n\n\n\n";
-       string c_dev = "\n2)Bos otyn: Bagdarlamashy C++, Jalaqy: 300000 tng\n Jums uakyty:5/2, Tolyk kun\n"; 
-       cout << c_dev;
-       cout << " Talaptar: senior development c++\n\n\n";
-       int vibor1;
-       cout << "\n\nEger siz jayap berginiz kelse jumys ornyn tandanyz:";
-       cin >> vibor1;
-       switch (vibor1)
-       {
-       case 1:
-           file_1(System_adm, name);
-           break;
-       case 2:
-           file_1(c_dev, name);
-           break;
-       default:
-           break;
-       }
-   }
-   else if (tenge > 300000)
-   {
-       string F_stack = "\n Bos oryn: FullSttack bagdarlamashy: IT\n, Jalaqy: 500000 tng\n Jumys uakyty: тегін \n"; cout << F_stack;
-       cout << " Talaptar: C,, C#, Python, SQL \n\n\n\n";
-       string Frntend = "\n2) Bos oryn: FronEnd bagdarlamashy: Azirleushi, Jalaqy: 650000 tng\n Ugymdagy jumys, tolyq kun \n"; cout << Frntend;
-       cout << "Talaptar: HTML, CSS, Python, JS \n\n\n";
-       int vibor1;
-       cout << "\n\n Eger siz jayap berginiz kelse jumys ornyn tandanyz:  ";
-       cin >> vibor1;
-       switch (vibor1)
-       {
-       case 1:
-           file_1(F_stack, name);
-           break;
-       case 2:
-           file_1(Frntend, name);
-           break;
-       default:
-           break;
-       }
-   }
+
+
+void searchJobByTitle(const vector<Job>& jobs, const string& title) {
+    cout << "Bos oryn \"" << title << "\":" << std::endl;
+    for (const auto& job : jobs) {
+        if (job.title == title) {
+            cout << "Title: " << job.title << endl;
+            cout << "City: " << job.city << endl;
+            cout << "Salary: " << job.salary << endl;
+            cout << endl;
+        }
+    }
+}
+
+
+void sortJobsBySalary(std::vector<Job>& jobs, bool reverse = false) {
+    if (reverse) {
+        sort(jobs.begin(), jobs.end(), [](const Job& a, const Job& b) {
+            return a.salary < b.salary;
+            });
+    }
+    else {
+        sort(jobs.begin(), jobs.end(), [](const Job& a, const Job& b) {
+            return a.salary > b.salary;
+            }
+        );
+    }
+}
+
+int main() {
+    
+    string Ast = "Astana.txt";
+    string alm = "Almaty.txt";
+    struct Vacancies {
+        vector<Job> Astana;
+        vector<Job> Almaty;
+    };
+    Vacancies vacancies = {
+        {
+            {"Engineer", "Astana", 150000},
+            {"Analyst", "Astana", 120000},
+            {"Satyshu", "Astana", 100000},
+            {"Manager", "Astana", 200000},
+            {"DevOps", "Astana", 180000},
+            {"Product", "Astana", 220000},
+            {"Designer", "Astana", 130000},
+        },
+        {
+            {"Dariger", "Almaty", 140000},
+            {"Qurylyshy", "Almaty", 110000},
+            {"Terapevt", "Almaty", 90000},
+            {"Teacher", "Almaty", 180000},
+            {"Designer", "Almaty", 160000},
+            {"Satyshu", "Almaty", 200000},
+            {"Aspaz", "Almaty", 120000},
+        }
+    };
+
+    
+    cout << "Qalany tandanyz:" <<endl;
+    cout << "1. Astana" << endl;
+    cout << "2. Almaty" << endl;
+
+    int cityChoice;
+    cin >> cityChoice;
+
+    
+    vector<Job>* selectedJobs;
+    if (cityChoice == 1) {
+        selectedJobs = &vacancies.Astana;
+    }
+    else if (cityChoice == 2) {
+        selectedJobs = &vacancies.Almaty;
+    }
+    else {
+        cout << "Invalid choice. Exiting program." << endl;
+        return 0;
+    }
+
+    
+    bool d = false;
+    int choice;
+    while (!d)
+    {
+
+        cout << "Tanday jasanyz: \n";
+        cout << "1. Barlyq jymus oryndaryn korsety" << endl;
+        cout << "2. Jymustu tabu" << endl;
+        cout << "3. Syruptay (kishiden ylkenge dein)" << endl;
+        cout << "4. Syruptay (ylkennen kishige dein)" << endl;
+        cout << "5. Barlyq oryndaryn filga saly "<< endl;
+        cout << "6. Exit " << endl;
+        cin >> choice;
+        string title;
+        switch (choice)
+        {
+        case 1:
+            
+            for (const auto& job : *selectedJobs) {
+                cout << "Title: " << job.title << endl;
+                cout << "City: " << job.city << endl;
+                cout << "Salary: " << job.salary << endl;
+                cout << endl;
+            }
+            break;
+        case 2:
+            
+            cout << "Jymustyn atyn engiziniz:" << endl;
+
+            cin >> title;
+            searchJobByTitle(*selectedJobs, title);
+            break;
+        case 3:
+            
+            sortJobsBySalary(*selectedJobs);
+            for (const auto& job : *selectedJobs) {
+                cout << "Title: " << job.title << endl;
+                cout << "City: " << job.city << endl;
+                cout << "Salary: " << job.salary << endl;
+                cout << endl;
+            }
+            break;
+        case 4:
+           
+            sortJobsBySalary(*selectedJobs, true);
+            for (const auto& job : *selectedJobs) {
+                cout << "Title: " << job.title << endl;
+                cout << "City: " << job.city << endl;
+                cout << "Salary: " << job.salary << endl;
+                cout << endl;
+            }
+            break;
+        case 5:
+            saveJobsToFile(vacancies.Astana, Ast);
+            saveJobsToFile(vacancies.Almaty, alm);
+            break;
+        case 6:
+            return 0;
+            break;
+        default:
+            cout << "\n\nDurys tanday jasanyz!!!!!!\n" << endl;
+            break;
+        }
+    }
+    return 0;
 }
